@@ -1,6 +1,6 @@
 <h2>Taskleaf</h2>
 <h1>タスクの新規登録</h1>
-<%= form_with(model: Task.new, local: true) do |form| %>
+<%= form_with(model: @task, local: true) do |form| %>
 <table>
   <div class="task_name">
     <h3><label for="name">名称</label></h3>
@@ -8,7 +8,7 @@
   </div>
 
   <div class="task_description">
-    <h3><label for="descripion">詳しい説明</label></h3>
+    <h3><label for="description">詳しい説明</label></h3>
     <p><%= form.text_area :description %></p>
   </div>
 
