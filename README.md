@@ -12,3 +12,4 @@
 
 - create_table "labels"
   - label string
+
