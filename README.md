@@ -25,3 +25,4 @@
   - bundle install
   - git add .
   - git push heroku step2:master
+  - heroku run rails db:migrate
