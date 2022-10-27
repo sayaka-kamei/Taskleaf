@@ -1,5 +1,5 @@
-<h2>Taskleaf</h2>
-<h1>タスク一覧</h1>
+<h2 >Taskleaf</h2>
+<h1 >タスク一覧</h1>
 
 <p><%= notice %></p>
 
@@ -11,11 +11,11 @@
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= task.name %></td>
-    <td><%= task.description %></td>
-    <td><%= link_to '詳細', task_path(task.id) %></td>
-    <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '編集していいですか？' } %></td>
-    <td><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '削除していいですか？' } %></td>
+    <td class="index"><%= task.name %></td>
+    <td class="index"><%= task.description %></td>
+    <td class="index"><%= link_to '詳細', task_path(task.id) %></td>
+    <td class="index"><%= link_to '編集', edit_task_path(task.id), data: { confirm: '編集していいですか？' } %></td>
+    <td class="index"><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '削除していいですか？' } %></td>
   </tr>
 <% end %>
 </table> 
