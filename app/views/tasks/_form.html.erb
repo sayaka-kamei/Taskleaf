@@ -21,8 +21,17 @@
     <p><%= form.text_area :description %></p>
   </div>
 
+  <div class="task_expiry_date">
+    <h3><label for="expiry_date">終了期限</label></h3>
+    <p><%= form.date_select :expiry_date %></p>
+  </div>
+
+  <div class="task_stasus">
+    <h3><label for="stasus">ステータス</label></h3>
+    <%= form.select :status, [["未着手","未着手"],["着手","着手"],["完了","完了"]], include_blank: "選択して下さい" %>
+  </div>
+
   <%= form.submit "登録する" %>
 <% end %>
 
 <%= link_to "一覧", tasks_path %>
-

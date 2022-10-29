@@ -3,9 +3,14 @@
 <%= form_with(model: @task, local: true) do |form| %>
   <%= form.hidden_field :name %>
   <%= form.hidden_field :description %>
+  <%= form.hidden_field :expiry_date %>
+  <%= form.hidden_field :status %>
   
   <p>名称 <%= @task.name %></p>
   <p>詳しい説明 <%= @task.description %></p>
+  <p>終了期限 <%= @task.expiry_date %></p>
+  <p>ステータス <%= @task.status %></p>
+  
   <%= form.submit "登録する" %>
 
   <%= link_to '戻る', name: 'back' %>
