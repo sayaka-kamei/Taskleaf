@@ -3,6 +3,17 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all.order(created_at: :desc)
     @tasks = Task.all.order(expiry_date: :desc) if params[:sort_expired]
+    if params[:task].present?
+      name = params[:task][:name]
+      status = params[:task][:status]
+      if name.present? && status.present?
+        @tasks = Task.search_name_status(name,status)
+      elsif name.present? 
+        @tasks = Task.search_name(name)
+      elsif status.present?
+        @tasks = Task.search_status(status)
+      end  
+    end      
   end
   
   def show
@@ -53,6 +64,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :expiry_date, :created_at, :sort_expired, :status)
+    params.require(:task).permit(:name, :description, :expiry_date, :created_at, :sort_expired, :search, :status)
   end
 end

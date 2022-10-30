@@ -2,6 +2,14 @@
 <h1 >タスク一覧</h1>
 
 <p><%= notice %></p>
+<h3>タスク検索</h3>
+<%= form_with(scope: :task, url: tasks_path, method: :get, local: true) do |form| %>
+  <%= form.label "タスク名" %>
+  <%= form.text_field :name %>
+  <%= form.label "ステータス" %>
+  <%= form.select :status, ["未着手","着手","完了"], include_blank: "選択して下さい" %>
+  <%= submit_tag '検索する',id:'search_button' %>
+<% end %>  
 
 <table>
   <tr>
