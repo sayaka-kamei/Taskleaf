@@ -31,6 +31,11 @@
     <%= form.select :status, [["未着手","未着手"],["着手","着手"],["完了","完了"]], include_blank: "選択して下さい" %>
   </div>
 
+  <div class="task_priority">
+    <h3><label for="priority">優先順位</label></h3>
+    <%= form.select :priority, Task.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
+  </div>
+
   <%= form.submit "登録する" %>
 <% end %>
 

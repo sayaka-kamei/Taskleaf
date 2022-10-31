@@ -17,6 +17,7 @@
     <h2><th>詳しい説明</th></h2>
     <h2><th><%= link_to"終了期限",tasks_path(sort_expired:"true") %></th></h2>
     <h2><th>ステータス</th></h2>
+    <h2><th><%= link_to"優先順位",tasks_path(sort_priority:"true") %></th></h2>
   </tr>
 
 <% @tasks.each do |task| %>
@@ -25,6 +26,7 @@
     <td><%= task.description %></td>
     <td><%= task.expiry_date %></td>
     <td><%= task.status %></td>
+    <td><%= task.priority %></td>
     <td><%= link_to '詳細', task_path(task.id) %></td>
     <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '編集していいですか？' } %></td>
     <td><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '削除していいですか？' } %></td>

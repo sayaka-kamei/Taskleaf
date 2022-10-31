@@ -15,6 +15,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         select '11',from: 'task[expiry_date(2i)]'
         select '1',from: 'task[expiry_date(3i)]'
         select '完了',from: 'task[status]'
+        select '高',from: 'task[priority]'
         click_on "登録する"
         expect(page).to have_content 'task'
       end
@@ -39,10 +40,21 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限の降順に並び替えられたタスク一覧が表示される' do
         visit tasks_path
         click_on "終了期限"
+        sleep(1)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test_name2'
       end
-    end  
+    end
+    context '優先順位でソートする場合' do
+      it '優先順位の昇順に並び替えられたタスク一覧が表示される' do
+        visit tasks_path
+        click_on "優先順位"
+        sleep(1)
+        task_list = all('.task_row')
+        # save_and_open_page
+        expect(task_list[0]).to have_content 'test_name1'
+      end
+    end    
   end
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
