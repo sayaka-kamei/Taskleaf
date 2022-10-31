@@ -35,8 +35,7 @@
     <h3><label for="priority">優先順位</label></h3>
     <%= form.select :priority, Task.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
   </div>
-
-  <%= form.submit "登録する" %>
+<%= form.submit "登録する" %>
 <% end %>
 
 <%= link_to "一覧", tasks_path %>
