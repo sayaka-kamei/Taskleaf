@@ -1,10 +1,22 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
-
+    @tasks = Task.all.order(created_at: :desc).page(params[:page])
+    @tasks = Task.all.order(expiry_date: :desc).page(params[:page]) if params[:sort_expired]
+    @tasks = Task.all.order(priority: :asc).page(params[:page]) if params[:sort_priority]
+    if params[:task].present?
+      name = params[:task][:name]
+      status = params[:task][:status]
+      if name.present? && status.present?
+        @tasks = Task.search_name_status(name,status).page(params[:page])
+      elsif name.present? 
+        @tasks = Task.search_name(name).page(params[:page])
+      elsif status.present?
+        @tasks = Task.search_status(status).page(params[:page])
+      end  
+    end      
   end
-
+  
   def show
     @task = Task.find(params[:id])
   end
@@ -53,6 +65,8 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description, :expiry_date, 
+                                :created_at, :sort_expired, :search, :status, :priority, :page ).
+                                merge(priority: params[:task][:priority])
   end
 end
