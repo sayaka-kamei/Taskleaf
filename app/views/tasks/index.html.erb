@@ -2,11 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <h2>タスク一覧</h2>
+  <div><h3>タスク一覧</h3></div>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
 </head>
-<p><%= notice %></p>
-<h3>タスク検索</h3>
+<h4>タスク検索</h4>
 <%= form_with(scope: :task, url: tasks_path, method: :get, local: true) do |form| %>
   <%= form.label "タスク名" %>
   <%= form.text_field :name %>
