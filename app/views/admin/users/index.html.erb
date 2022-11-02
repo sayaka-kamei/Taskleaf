@@ -1,0 +1,25 @@
+<h3>Taskleaf</h3>
+
+<h2>ユーザー 一覧<h2>
+
+<%= link_to '新規登録', new_admin_user_path %>
+
+<table>
+  <tr>
+    <th>名前</th>
+    <th>メールアドレス</th>
+    <th>管理者権限</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><div><%= link_to user.name, [:admin, user] %></div></td>
+      <td><div><%= user.email %></div></td>
+      <td><div><%= user.admin %></div></td>
+      <td><div><%= link_to '詳細',admin_user_path(user.id) %></div></td>
+      <td><div><%= link_to '編集',edit_admin_user_path(user) %></div></td>
+      <td><div><%= link_to '削除',[:admin, user],method: :delete, date: { confirm: '削除していいですか？' } %></div></td>
+    </tr>
+  <% end %>    
+</table>  
+

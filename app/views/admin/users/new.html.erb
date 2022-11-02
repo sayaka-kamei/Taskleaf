@@ -1,0 +1,36 @@
+<h3>Taskleaf</h3>
+
+<h2>ユーザー登録<h2>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: [:admin,@user], local: true) do |form| %>
+  <div><%= form.label "名前" %>
+  <%= form.text_field :name %></div>
+
+  <div><%= form.label "メールアドレス" %>
+  <%= form.email_field :email %></div>
+  
+  <div><%= form.label "管理者権限" %>
+  <%= form.check_box :admin %></div>
+
+  <div><%= form.label "パスワード" %>
+  <%= form.password_field :password %></div>
+
+  <div><%= form.label "パスワード確認" %>
+  <%= form.password_field :password_confirmation %></div>
+
+  <%= form.submit "登録する" %>
+
+<% link_to '一覧', admin_users_path %>  
+<% end %>  
+
