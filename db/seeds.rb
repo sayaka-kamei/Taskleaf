@@ -10,7 +10,7 @@ User.create!(name: 'admin',
               email: 'admin100@example.com',
               admin: 'true',
               password: 'password',
-              password_confirmation: 'password',
+              password_confirmation: 'password'
               )
 
 Task.create!(name: 'test_name1',
