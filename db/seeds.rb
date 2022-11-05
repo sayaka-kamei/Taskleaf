@@ -11,7 +11,6 @@ User.create!(name: 'admin',
               admin: 'true',
               password: 'password',
               password_confirmation: 'password',
-              id: '1'
               )
 
 Task.create!(name: 'test_name1',
@@ -19,5 +18,5 @@ Task.create!(name: 'test_name1',
               expiry_date: '2022/11/10',
               status: '着手',
               priority: '高',
-              id: '2'
+              user_id: '1'
               )              
