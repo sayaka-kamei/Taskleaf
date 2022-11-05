@@ -21,5 +21,5 @@ FactoryBot.define do
     expiry_date { '2022/11/20' }
     status { '完了' }
     priority { '中' }
-  end
+  end  
 end

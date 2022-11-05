@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :require_admin, only: [:index] 
 
   def index
     @users = User.all
@@ -48,5 +49,6 @@ class Admin::UsersController < ApplicationController
 
   def require_admin
     redirect_to root_path unless current_user.admin?
-  end  
+  end
+
 end

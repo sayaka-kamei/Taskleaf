@@ -20,7 +20,6 @@
       <%= link_to "タスク一覧", tasks_path %> 
       <% if current_user.admin? %>
         <%= link_to "ユーザー一覧", admin_users_path %>
-        <%= flash[:alret] = '管理者以外はアクセスできません' %>
       <% end %>
       <%= link_to "Logout", session_path(current_user.id), method: :delete %>
     <% else %>

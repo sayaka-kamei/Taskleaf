@@ -65,7 +65,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :expiry_date, 
+    params.require(:task).permit(:id, :name, :description, :expiry_date, 
                                 :created_at, :sort_expired, :search, :status, :priority, :page ).
                                 merge(priority: params[:task][:priority])
   end

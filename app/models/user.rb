@@ -6,4 +6,10 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, length: { minimum: 6 }
   has_many :tasks
+
+  private
+
+  def ensure_has_name
+    self.name = 'Taro' if name.blank?
+  end
 end
