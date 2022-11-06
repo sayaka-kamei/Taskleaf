@@ -8,11 +8,11 @@ class TasksController < ApplicationController
       name = params[:task][:name]
       status = params[:task][:status]
       if name.present? && status.present?
-        @tasks = Task.search_name_status(name,status).page(params[:page])
+        @tasks = current_user.tasks.search_name_status(name,status).page(params[:page])
       elsif name.present? 
-        @tasks = Task.search_name(name).page(params[:page])
+        @tasks = current_user.tasks.search_name(name).page(params[:page])
       elsif status.present?
-        @tasks = Task.search_status(status).page(params[:page])
+        @tasks = current_user.tasks.search_status(status).page(params[:page])
       end  
     end      
   end
@@ -53,7 +53,6 @@ class TasksController < ApplicationController
 
   def confirm
     @task =  current_user.tasks.build(task_params)
-    render :new if @task.invalid?
   end  
   
   def destroy

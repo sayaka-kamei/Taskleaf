@@ -19,6 +19,7 @@
     <div class="container">
       <div class="row">
         <tr>
+          <h2><th><div class="col">ユーザー名</div></th></h2>
           <h2><th><div class="col">名称</div></th></h2>
           <h2><th><div class="col">詳しい説明</div></th></h2>
           <h2><th><div class="col"><%= link_to"終了期限",tasks_path(sort_expired:"true") %></div></th></h2>
@@ -28,6 +29,7 @@
 
         <% @tasks.each do |task| %>
           <tr class="task_row">
+            <td><div class="col"><%= task.user.name %></div></td>
             <td><div class="col"><%= task.name %></div></td>
             <td><div class="col"><%= task.description %></div></td>
             <td><div class="col"><%= task.expiry_date %></div></td>

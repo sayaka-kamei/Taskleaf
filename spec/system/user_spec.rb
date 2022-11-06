@@ -10,17 +10,11 @@ RSpec.describe 'ユーザー管理機能', type: :system do
           fill_in "user[password]", with: "test_test"
           fill_in "user[password_confirmation]", with: "test_test"
           click_on "登録する"
-          expect(page).to have_content 'ログイン'
+          expect(page).to have_content 'ユーザー名'
         end
       end
       context 'ユーザがログインせずタスク一覧画面に飛ぼうとした場合' do
         it 'ログイン画面に遷移する' do
-          visit new_user_path
-          fill_in "user[name]", with: "test_name1"
-          fill_in "user[email]", with: "test1@gmail.com"
-          fill_in "user[password]", with: "test_test"
-          fill_in "user[password_confirmation]", with: "test_test"
-          click_on "登録する"
           visit tasks_path
           expect(page).to have_content 'ログイン'
         end
@@ -90,7 +84,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
           fill_in "user[password]", with: "test_test"
           fill_in "user[password_confirmation]", with: "test_test"
           click_on "登録する"
-          expect(page).to have_content 'ユーザー 一覧'
+          expect(page).to have_content 'test_name1'
         end
       end
       context '管理ユーザがログインした場合' do

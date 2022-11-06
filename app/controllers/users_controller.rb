@@ -4,11 +4,16 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    if logged_in?
+      flash[:notice] = "ユーザー登録済みです"
+      redirect_to tasks_path
+    end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
       render :new
@@ -17,6 +22,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @tasks = current_user.tasks.all
   end
 
   private
@@ -38,7 +44,7 @@ class UsersController < ApplicationController
   def require_user
     if current_user.id != params[:id].to_i
       flash[:notice] = "権限がありません"
-      redirect_to tasks_path
+      redirect_to tasks_path  
     end  
-  end   
+  end
 end
