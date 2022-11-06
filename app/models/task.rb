@@ -4,5 +4,6 @@ class Task < ApplicationRecord
   scope :search_status, -> (status){where(status: status)}
   scope :search_name_status, -> (name,status){where('name LIKE ?',"%#{name}%").where(status: status)}
   enum priority: { "高": 0, "中": 1, "低": 2 }
+  belongs_to :user
 end
 

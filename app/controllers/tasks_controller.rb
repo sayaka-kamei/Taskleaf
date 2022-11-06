@@ -1,24 +1,24 @@
 class TasksController < ApplicationController
 
   def index
-    @tasks = Task.all.order(created_at: :desc).page(params[:page])
-    @tasks = Task.all.order(expiry_date: :desc).page(params[:page]) if params[:sort_expired]
-    @tasks = Task.all.order(priority: :asc).page(params[:page]) if params[:sort_priority]
+    @tasks = current_user.tasks.order(created_at: :desc).page(params[:page])
+    @tasks = current_user.tasks.order(expiry_date: :desc).page(params[:page]) if params[:sort_expired]
+    @tasks = current_user.tasks.order(priority: :asc).page(params[:page]) if params[:sort_priority]
     if params[:task].present?
       name = params[:task][:name]
       status = params[:task][:status]
       if name.present? && status.present?
-        @tasks = Task.search_name_status(name,status).page(params[:page])
+        @tasks = current_user.tasks.search_name_status(name,status).page(params[:page])
       elsif name.present? 
-        @tasks = Task.search_name(name).page(params[:page])
+        @tasks = current_user.tasks.search_name(name).page(params[:page])
       elsif status.present?
-        @tasks = Task.search_status(status).page(params[:page])
+        @tasks = current_user.tasks.search_status(status).page(params[:page])
       end  
     end      
   end
   
   def show
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def new
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task =  Task.new(task_params)
+    @task =  current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else  
@@ -39,11 +39,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       redirect_to tasks_path, notice: "タスクを編集しました!"
     else
@@ -52,12 +52,11 @@ class TasksController < ApplicationController
   end
 
   def confirm
-    @task = Task.new(task_params)
-    render :new if @task.invalid?
+    @task =  current_user.tasks.build(task_params)
   end  
   
   def destroy
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     @task.destroy
     redirect_to tasks_path, notice:"タスクを削除しました!"
   end  
@@ -65,7 +64,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :expiry_date, 
+    params.require(:task).permit(:id, :name, :description, :expiry_date, 
                                 :created_at, :sort_expired, :search, :status, :priority, :page ).
                                 merge(priority: params[:task][:priority])
   end
