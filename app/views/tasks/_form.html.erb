@@ -35,6 +35,12 @@
     <h3><label for="priority">優先順位</label></h3>
     <%= form.select :priority, Task.priorities.keys, {prompt: "選択してください"}, class: "priority_select" %>
   </div>
+
+  <div class="task_label">
+    <h3><label>ラベル</label></h3>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+  </div>
+  
 <%= form.submit "登録する" %>
 <% end %>
 
