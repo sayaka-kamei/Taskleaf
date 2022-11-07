@@ -11,8 +11,9 @@
   <%= form.text_field :name %>
   <%= form.label "ステータス" %>
   <%= form.select :status, ["未着手","着手","完了"], include_blank: "選択して下さい" %>
+  <%= form.select("label_id",Label.pluck(:name, :id), {inclide_blank: true }) %>
   <%= submit_tag '検索する',id:'search_button' %>
-<% end %>  
+<% end %>
 
 <body>
   <table>
@@ -25,6 +26,7 @@
           <h2><th><div class="col"><%= link_to"終了期限",tasks_path(sort_expired:"true") %></div></th></h2>
           <h2><th><div class="col">ステータス</div></th></h2>
           <h2><th><div class="col"><%= link_to"優先順位",tasks_path(sort_priority:"true") %></div></th></h2>
+          <h2><th><div class="col">ラベル</div></th></h2>
         </tr>
 
         <% @tasks.each do |task| %>
@@ -35,6 +37,11 @@
             <td><div class="col"><%= task.expiry_date %></div></td>
             <td><div class="col"><%= task.status %></div></td>
             <td><div class="col"><%= task.priority %></div></td>
+            <td>
+              <% task.labels.each do |label| %>
+                <%= label.name %>
+              <% end %>
+            </td>  
             <td><div class="panel panel-FFE98D"><%= link_to '詳細', task_path(task.id) %></div></td>
             <td><div class="panel panel-42ABB3"><%= link_to '編集', edit_task_path(task.id), data: { confirm: '編集していいですか？' } %></div></td>
             <td><div class="panel panel-EB5E69"><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '削除していいですか？' } %></div></td>
@@ -42,7 +49,7 @@
         <% end %>
       </div>
     </div>  
-  <div class="panel panel-blue"><%= link_to '新規登録',new_task_path %></div>
+  <td><div class="panel panel-blue"><%= link_to '新規登録',new_task_path %></div><td>
   <style>
     body {
       margin: 4rem 0;
